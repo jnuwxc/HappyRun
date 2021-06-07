@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray">
+
+
+    <ImageView
+        android:id="@+id/userAvatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/avatar_man"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试用户1"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/userAvatar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/userId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:text="1033170xxx"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/userAvatar"
+        app:layout_constraintTop_toBottomOf="@id/userName" />
+
+    <TextView
+        android:id="@+id/userMajor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="人工智能与计算机学院"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/userAvatar"
+        app:layout_constraintTop_toBottomOf="@id/userId"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvUserSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="个人空间"
+        android:textSize="12sp"
+        android:layout_marginRight="5dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toStartOf="@id/userSpace"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline1" />
+
+
+    <ImageView
+        android:id="@+id/userSpace"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/right_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="10dp"/>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="120dp"
+        />
+
+    <View
+        android:id="@+id/userLine1"
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:background="@color/text_main"
+        app:layout_constraintTop_toBottomOf="@id/guideline1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"/>
+
+    <View
+        android:id="@+id/userLine2"
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:background="@color/text_main"
+        app:layout_constraintTop_toBottomOf="@id/guideline1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.66"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/punchNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16次"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/userLine1"
+        app:layout_constraintTop_toBottomOf="@id/guideline1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打卡次数"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/userLine1"
+        app:layout_constraintTop_toBottomOf="@id/punchNum"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/targetNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="40次"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/userLine1"
+        app:layout_constraintEnd_toStartOf="@id/userLine2"
+        app:layout_constraintTop_toBottomOf="@id/guideline1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="目标次数"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@id/userLine1"
+        app:layout_constraintEnd_toStartOf="@id/userLine2"
+        app:layout_constraintTop_toBottomOf="@id/targetNum"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/totalDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13.34公里"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/userLine2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="运动总距离"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@id/userLine2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalDistance"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
