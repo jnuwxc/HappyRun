@@ -87,9 +87,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SpaceActivity.class);
+                intent.putExtra("userId", userId.getText().toString());
+                intent.putExtra("userName", userName.getText().toString());
+                intent.putExtra("userMajor", userMajor.getText().toString());
+                intent.putExtra("punchNum", punchNum.getText().toString());
+                intent.putExtra("targetNum", targetNum.getText().toString());
+                intent.putExtra("distance", distance.getText().toString());
                 startActivity(intent);
             }
         });
+//        binding.btnReLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mapLocation();
+//            }
+//        });
 
         // TODO: 2021/6/5 判断登录情况
         SharedPreferences loginSp = getSharedPreferences("login", Context.MODE_PRIVATE);
@@ -211,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
 
     //定位
     private void mapLocation() {
+        Log.d(TAG, "mapLocation: 定位");
         //设置本机定位点
         MyLocationConfiguration myLocationConfiguration = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING,
                 true, BitmapDescriptorFactory.fromResource(R.drawable.my_location));
@@ -219,6 +232,8 @@ public class MainActivity extends AppCompatActivity {
         //通过LocationClientOption设置LocationClient相关参数
         locationClient = new LocationClient(this);
         LocationClientOption option = new LocationClientOption();
+        // 高精度定位
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(1000);
@@ -237,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
     class MyLocationListener extends BDAbstractLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
+            Log.d(TAG, "onReceiveLocation: " + location);
             //mapView 销毁后不在处理新接收的位置
             if (location == null || mapView == null) {
                 return;
@@ -247,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
                     .direction(location.getDirection()).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             myLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-            Log.d(TAG, "onReceiveLocation: " + location);
             baiduMap.setMyLocationData(locData);
         }
     }

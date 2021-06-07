@@ -66,11 +66,11 @@ public class PointSelectActivity extends Activity {
             // 起始打卡点和距离过近的打卡点无法设置为终点
             if (distance[i] < 50) {
                 startPoint = i;
-                info = info + "（起始打卡点）";
-                radioButton.setVisibility(View.INVISIBLE);
+                info = info + "（起始打卡点）【仅测试时可以选择】";
+//                radioButton.setVisibility(View.INVISIBLE);
             } else if (distance[i] < 1000) {
-                info = info + "（距离过近）";
-                radioButton.setVisibility(View.INVISIBLE);
+                info = info + "（距离过近）【仅测试时可以选择】";
+//                radioButton.setVisibility(View.INVISIBLE);
             }else {
                 if (!isOneChecked) {
                     isOneChecked = true;

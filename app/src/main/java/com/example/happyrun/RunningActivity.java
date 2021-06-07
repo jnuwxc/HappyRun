@@ -22,6 +22,8 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.Trace;
+import com.baidu.trace.api.track.DistanceRequest;
+import com.baidu.trace.api.track.DistanceResponse;
 import com.baidu.trace.api.track.HistoryTrackRequest;
 import com.baidu.trace.api.track.HistoryTrackResponse;
 import com.baidu.trace.api.track.LatestPointRequest;
@@ -40,7 +42,6 @@ import java.util.Date;
 
 public class RunningActivity extends AppCompatActivity {
 
-    private ArrayList<String> sosPhones;
     private static final String TAG = "RunningActivity";
     private ActivityRunningBinding binding;
     private boolean isStartTrace;
@@ -51,7 +52,6 @@ public class RunningActivity extends AppCompatActivity {
     private long startTime;
     private Handler handler = new Handler();
     private LatLng nowLatlng;
-    private String debug = new String();
     private TimeTrackRunnable timeTrackRunnable;
 
     @Override
@@ -73,17 +73,15 @@ public class RunningActivity extends AppCompatActivity {
         binding.tvSpeed.setText("0.0");
         binding.tvTime.setText("0.0");
         binding.tvStopPoint.setText(runPoint.getPointInfo()[stopPoint]);
-
-        // TODO: 2021/6/6 紧急求助相关
-        sosPhones = new ArrayList<>();
-        initSosPhone();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sosPhones);
-        View dialogSos = getLayoutInflater().inflate(R.layout.dialog_sos, null);
-        TextView textView = dialogSos.findViewById(R.id.tvName);
-        textView.setText("???");
-        ListView listView = dialogSos.findViewById(R.id.lvSosPhone);
-        Log.d(TAG, "onCreate: " + listView);
-        listView.setAdapter(adapter);
+        binding.ivSos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentSos = new Intent(RunningActivity.this, SosActivity.class);
+                intentSos.putExtra("lat", (float) nowLatlng.latitude);
+                intentSos.putExtra("lng", (float) nowLatlng.longitude);
+                startActivity(intentSos);
+            }
+        });
 
         // TODO: 2021/6/6 结束跑步
         binding.btnStop.setOnClickListener(new View.OnClickListener() {
@@ -91,28 +89,32 @@ public class RunningActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LatLng stopLatlng = runPoint.getPointLatlng(stopPoint);
                 double distanceToStop = DistanceUtil.getDistance(nowLatlng, stopLatlng);
-                if (distanceToStop < 50) {
-                    Intent intentEnd = new Intent(RunningActivity.this, RunResultActivity.class);
-                    startActivity(intentEnd);
-                }else {
-                    AlertDialog alertDialog = new AlertDialog.Builder(RunningActivity.this)
-                            .setTitle("警告")
-                            .setMessage("你距离目标打卡点的距离为"
-                                    + StringUtil.formatDistance(distanceToStop / 1000) +
-                                    "km\n不符合打卡规则\n放弃将不计入成绩，返回可继续跑步")
-                            .setPositiveButton("继续跑步", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            })
-                            .setNegativeButton("结束", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            })
-                            .show();
-                }
+                Intent intentEnd = new Intent(RunningActivity.this, RunResultActivity.class);
+                intentEnd.putExtra("startTime", startTime);
+                startActivity(intentEnd);
+//                if (distanceToStop < 50) {
+//                    Intent intentEnd = new Intent(RunningActivity.this, RunResultActivity.class);
+//                    intentEnd.putExtra("startTime", startTime);
+//                    startActivity(intentEnd);
+//                }else {
+//                    AlertDialog alertDialog = new AlertDialog.Builder(RunningActivity.this)
+//                            .setTitle("警告")
+//                            .setMessage("你距离目标打卡点的距离为"
+//                                    + StringUtil.formatDistance(distanceToStop / 1000) +
+//                                    "km\n不符合打卡规则\n放弃将不计入成绩，返回可继续跑步")
+//                            .setPositiveButton("继续跑步", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                }
+//                            })
+//                            .setNegativeButton("结束", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    finish();
+//                                }
+//                            })
+//                            .show();
+//                }
             }
         });
     }
@@ -200,7 +202,6 @@ public class RunningActivity extends AppCompatActivity {
             @Override
             public void onInitBOSCallback(int i, String s) {
             }
-
         };
         // 开启服务
         mTraceClient.startTrace(mTrace, mTraceListener);
@@ -227,28 +228,56 @@ public class RunningActivity extends AppCompatActivity {
         // 请求标识
         int tag = 1;
         // 创建历史轨迹请求实例
-        HistoryTrackRequest historyTrackRequest = new HistoryTrackRequest(tag,
+        DistanceRequest distanceRequest = new DistanceRequest(tag,
                 MyApplication.SERVICE_ID, entityName);
 
         //设置轨迹查询起止时间
         // 结束时间(单位：秒)
         long endTime = System.currentTimeMillis() / 1000;
         // 设置开始时间
-        historyTrackRequest.setStartTime(startTime);
+        distanceRequest.setStartTime(startTime);
         // 设置结束时间
-        historyTrackRequest.setEndTime(endTime);
+        distanceRequest.setEndTime(endTime);
 
         // 初始化轨迹监听器
         OnTrackListener mTrackListener = new OnTrackListener() {
-            // 历史轨迹回调
             @Override
-            public void onHistoryTrackCallback(HistoryTrackResponse response) {
-                Log.d(TAG, "onHistoryTrackCallback: " + response);
-                binding.tvDistance.setText(StringUtil.formatDistance(response.getDistance() / 1000));
+            public void onDistanceCallback(DistanceResponse distanceResponse) {
+                Log.d(TAG, "" + distanceResponse);
+                binding.tvDistance.setText(StringUtil.formatDistance
+                        (distanceResponse.getDistance() / 1000));
             }
         };
-        // 查询历史轨迹
-        mTraceClient.queryHistoryTrack(historyTrackRequest, mTrackListener);
+        mTraceClient.queryDistance(distanceRequest, mTrackListener);
+//        //鹰眼服务ID
+//        long serviceId = MyApplication.SERVICE_ID;
+//         //是否返回精简的结果（0 : 将只返回经纬度，1 : 将返回经纬度及其他属性信息）
+//        int simpleReturn = 1;
+//        //开始时间（Unix时间戳）
+//        //结束时间（Unix时间戳）
+//        int endTime = (int) (System.currentTimeMillis() / 1000);
+//        //分页大小
+//        int pageSize = 1000;
+//        //分页索引
+//        int pageIndex = 1;
+//        //轨迹查询监听器
+//        OnTrackListener trackListener = new OnTrackListener() {
+//            //请求失败回调接口
+//            @Override
+//            public void onRequestFailedCallback(String arg0) {
+//                System.out.println("track请求失败回调接口消息 : " + arg0);
+//            }
+//
+//            // 查询历史轨迹回调接口
+//            @Override
+//            public void onQueryHistoryTrackCallback(String arg0) {
+//                System.out.println("查询历史轨迹回调接口消息 : " + arg0);
+//            }
+//
+//        };
+//
+//        //查询历史轨迹
+//        queryHistoryTrack(serviceId, entityName, simpleReturn, startTime, endTime, pageSize,pageIndex,trackListener);
     }
 
     private void queryLocation() {
@@ -265,6 +294,7 @@ public class RunningActivity extends AppCompatActivity {
         mTraceClient.queryLatestPoint(request, new OnTrackListener() {
             @Override
             public void onLatestPointCallback(LatestPointResponse latestPointResponse) {
+                Log.d(TAG, "onLatestPointCallback: " + latestPointResponse);
                 nowLatlng = new LatLng(latestPointResponse.getLatestPoint().getLocation().latitude
                         , latestPointResponse.getLatestPoint().getLocation().longitude);
                 long time = System.currentTimeMillis() / 1000 - startTime;
@@ -285,17 +315,11 @@ public class RunningActivity extends AppCompatActivity {
                 binding.tvTime.setText(StringUtil.formatTime(System.currentTimeMillis() / 1000 - startTime));
                 binding.tvSpeed.setText(StringUtil.formatNum(
                         (float) latestPointResponse.getLatestPoint().getSpeed(), 2));
-                Log.d(TAG, "onLatestPointCallback: " + latestPointResponse.getLatestPoint());
             }
         });
     }
 
-    private void initSosPhone() {
-        sosPhones.add("公安：110");
-        sosPhones.add("医院：120");
-        sosPhones.add("火警：119");
-        sosPhones.add("校保卫处：xxxxx");
-    }
+
 
     // 每隔1秒查询一次位置
     class TimeTrackRunnable implements Runnable {

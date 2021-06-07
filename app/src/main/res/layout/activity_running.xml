@@ -70,10 +70,10 @@
         android:textColor="@color/text_second"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivMap" />
+        app:layout_constraintTop_toTopOf="@+id/ivSos" />
 
     <ImageView
-        android:id="@+id/ivMap"
+        android:id="@+id/ivSos"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
@@ -81,7 +81,7 @@
         android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:srcCompat="@drawable/map" />
+        app:srcCompat="@drawable/sos" />
 
     <Button
         android:id="@+id/btnStop"

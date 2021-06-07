@@ -53,6 +53,16 @@
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginBottom="20dp"/>
 
+<!--            <Button-->
+<!--                android:id="@+id/btnReLocation"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/brand_main"-->
+<!--                android:layout_gravity="bottom|left"-->
+<!--                android:textSize="18sp"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:text="重新定位"/>-->
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -75,7 +85,7 @@
                     android:id="@+id/articleTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="大学生每天跑步是什么样的感觉?"
+                    android:text="如何避免跑步受伤?"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +95,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="个人感觉：个人觉得跑步可以调动身体每一寸肌肤（个人认为哈）而且，跑的时间久了以后，整个人都感觉轻快了许多。每次跑完，出汗的快感，真的很舒畅。回去洗个热水澡，躺在床上，别提多爽，而且，还能美美的睡一觉。何乐而不为呢！"
+                    android:text="首先要坚持正确的跑步姿势，正确的跑步姿势一定要注意：头、肩、臀、支撑腿的前脚掌（支撑点）在同一条垂直线上，这个姿势是一种平衡状态。其次跑步的步伐幅度不要太大，后腿上拉的时候也不需要刻意把上拉腿的足踝放在很高的位置上，应该是自然而然发生的。"
                     android:layout_margin="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

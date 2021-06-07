@@ -44,9 +44,9 @@ public class StringUtil {
      */
     public static String formatTime(long time) {
         if (time <= 60) {
-            return time + "s";
+            return time + "秒";
         } else if (time <= 3600) {
-            return (time / 60) + "." + (time % 60);
+            return (time / 60) + "分" + (time % 60) + "秒";
         }else {
             return "errorTime";
         }

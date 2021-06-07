@@ -93,5 +93,132 @@
         app:layout_constraintTop_toBottomOf="@id/divide1"
         android:layout_marginTop="50dp" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clChangePassword"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/guideLeft"
+        app:layout_constraintEnd_toEndOf="@id/guideRight"
+        app:layout_constraintTop_toBottomOf="@id/divide2"
+        app:layout_constraintBottom_toTopOf="@id/divide3"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更改密码"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/right_arrow"
+            android:layout_marginRight="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divide3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#f5f5f5"
+        app:layout_constraintStart_toEndOf="@id/guideLeft"
+        app:layout_constraintEnd_toStartOf="@id/guideRight"
+        app:layout_constraintTop_toBottomOf="@id/divide2"
+        android:layout_marginTop="50dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clChangeContact"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/guideLeft"
+        app:layout_constraintEnd_toEndOf="@id/guideRight"
+        app:layout_constraintTop_toBottomOf="@id/divide3"
+        app:layout_constraintBottom_toTopOf="@id/divide4"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更改紧急联系人"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/right_arrow"
+            android:layout_marginRight="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divide4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#f5f5f5"
+        app:layout_constraintStart_toEndOf="@id/guideLeft"
+        app:layout_constraintEnd_toStartOf="@id/guideRight"
+        app:layout_constraintTop_toBottomOf="@id/divide3"
+        android:layout_marginTop="50dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clAbout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/guideLeft"
+        app:layout_constraintEnd_toEndOf="@id/guideRight"
+        app:layout_constraintTop_toBottomOf="@id/divide4"
+        app:layout_constraintBottom_toTopOf="@id/divide5"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="作者：江南大学王学成"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/right_arrow"
+            android:layout_marginRight="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/divide5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#f5f5f5"
+        app:layout_constraintStart_toEndOf="@id/guideLeft"
+        app:layout_constraintEnd_toStartOf="@id/guideRight"
+        app:layout_constraintTop_toBottomOf="@id/divide4"
+        android:layout_marginTop="50dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

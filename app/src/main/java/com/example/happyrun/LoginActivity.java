@@ -200,6 +200,10 @@ public class LoginActivity extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
+        if (ContextCompat.checkSelfPermission(LoginActivity.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.CALL_PHONE);
+        }
         if (!permissionList.isEmpty()) {
             String[] permission = permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(LoginActivity.this, permission, 2);
